@@ -46,4 +46,8 @@ Okay, now you are ready to use Raphael on your local. Browse to "http://localhos
 
 For deep informations, please browse to application READMEs!
 
+#### URLS
+
+Raphael Browser: `http://localhost:8000`
+Raphael PhpMyAdmin for MySQL: `http://localhost:8181` (root:raphael)
 
