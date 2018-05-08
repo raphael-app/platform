@@ -32,10 +32,11 @@ Ssh to  docker container.
 ```
 docker exec -it raphael-local-app bash
 ```
-Prepare/Migrate the models
+Prepare/Migrate the models && seed the data
 ```
 python3 manage.py makemigrations
 python3 manage.py migrate
+python3 manage.py loaddata restaurants
 ``` 
 Create the first super user (Don't forget to fill the prompts)
 ```
@@ -49,5 +50,5 @@ For deep informations, please browse to application READMEs!
 #### URLS
 
 Raphael Browser: `http://localhost:8000`
-Raphael PhpMyAdmin for MySQL: `http://localhost:8181` (root:raphael)
+Raphael PhpMyAdmin for MySQL: `http://localhost:8181` (raphael-database:root:raphael)
 
