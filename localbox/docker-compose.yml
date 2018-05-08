@@ -1,0 +1,56 @@
+###############################
+#
+# This compose file has been prepared by Muhammet ARSLAN to set-up Local Development Environment as same as Production *-ish Environment.
+# 
+# This compose file includes
+#   - MYSQL
+#   - NGINX
+#   - PHP with Application Volume
+# 
+# @package local
+# @author Muhammet Arslan <muhammet.arsln@gmail.com>
+#
+##############################
+version: '2'
+services:
+  raphael-database:
+     image: mysql:5.7
+     volumes:
+       - raphael_database_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: raphael
+       MYSQL_DATABASE: raphael
+       MYSQL_USER: raphael
+       MYSQL_PASSWORD: raphael
+
+  raphael-app:
+    container_name: raphael-local-app
+    hostname: local-raphael-app
+    depends_on:
+       - raphael-database
+    build:
+      context: ../docker/raphael/.
+    volumes:
+      - ../../raphael:/srv/gits/raphael
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    links:
+      - raphael-database
+
+  raphael-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: raphael-local-phpmyadmin
+    hostname: local-raphael-phpmyadmin
+    depends_on:
+       - raphael-database
+    environment:
+     - PMA_ARBITRARY=1
+    ports:
+     - 8181:80
+    volumes:
+     - /sessions
+
+volumes:
+    raphael_database_data:
