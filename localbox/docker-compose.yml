@@ -39,6 +39,21 @@ services:
     links:
       - raphael-database
 
+  rla-app:
+    container_name: rla-local-app
+    hostname: local-rla-app
+    depends_on:
+       - raphael-app
+    build:
+      context: ../docker/rla/.
+    volumes:
+      - ../../rla:/srv/gits/rla
+    entrypoint: /tmp/entrypoint.sh
+    ports:
+      - "3000:3000"
+    links:
+      - raphael-app
+
   raphael-phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: raphael-local-phpmyadmin

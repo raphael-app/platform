@@ -8,3 +8,6 @@ markdown
 django-filter
 django-oauth-toolkit
 django-cors-middleware
+django-cors-headers
+djangorestframework-jwt
+python-slugify
